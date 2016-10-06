@@ -1,0 +1,42 @@
+---
+##############################################################################
+# System initialisation
+# Install all of the required apt packages
+##############################################################################
+- name: Create log file directory
+  file: path="{{ install_dir }}/log/" state=directory
+
+- name: update apt-cache
+  become: yes
+  become_method: sudo
+  apt: update_cache=yes # upgrade=full install_recommends=no
+
+- name: Install useful packages
+  apt: pkg={{ item }} state=installed install_recommends=no
+  with_items:
+    - build-essential
+    - git
+    - htop
+    - iotop
+    - vim
+    - python-pip
+    - python-virtualenv
+  become: yes
+  become_method: sudo
+
+- name: Ensures /var/www/.python-eggs dir exists
+  file: path=/var/www/.python-eggs state=directory owner=www-data
+  become: yes
+  become_method: sudo
+
+- name: Ensures {{ install_dir }}/src dir exists
+  file: path="{{ install_dir }}/src" state=directory
+
+- name: Copy indigo archive on the server
+  unarchive: src=indigo-1.1.tar.gz dest="{{ install_dir }}/src"
+
+- name: Create a link from indigo-1.1 to indigo
+  file: src="{{ install_dir }}/src/indigo-1.1" dest="{{ install_dir }}/indigo" state=link
+  
+- name: Copy settings
+  template: src=settings.py dest="{{ install_dir }}/indigo"

@@ -1,0 +1,10 @@
+---
+# This playbook deploys new version of the code on an already installed
+# system
+# ansible-playbook deploy_code.yml -i hosts --ask-become-pass
+
+- hosts: indigo
+  remote_user: indigo
+  roles:
+    - indigo-code
+    

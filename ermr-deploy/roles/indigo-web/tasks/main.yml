@@ -1,0 +1,137 @@
+---
+##############################################################################
+# Create the virtualenv where we will host the indigo-web app
+##############################################################################
+
+- name: update apt-cache
+  apt: update_cache=yes
+  sudo: true
+
+- name: install packages for indigo web-ui
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - nginx
+    - expect
+    - libldap2-dev
+    - libsasl2-dev
+    - python-dev
+  sudo: true
+
+- name: Install Global Python modules
+  pip:
+    name=pexpect
+  sudo: true
+
+- name: Manually create the webapp virtualenv
+  command: virtualenv "{{ install_dir }}/web" creates="{{ install_dir }}/web"
+
+- name: Copy indigo web archive on the server
+  unarchive: src=indigo-web-1.1.tar.gz dest="{{ install_dir }}/src"
+
+- name: Create a link from indigo-web-1.1 to project
+  file: src="{{ install_dir }}/src/indigo-web-1.1" dest="{{ install_dir }}/web/project" state=link
+
+- name: Install requirements
+  pip:
+    requirements="{{ install_dir }}/web/project/requirements.txt"
+    virtualenv="{{ install_dir }}/web"
+
+- name: Install indigo lib into webapp
+  shell: "{{ install_dir }}/web/bin/python setup.py develop"
+  args:
+    chdir: "{{ install_dir }}/indigo"
+
+- name: Copy init script (upstart)
+  template: src=indigo-web.conf dest=/etc/init/indigo-web.conf
+  sudo: true
+
+#- name: Copy Indigo-web init script (systemd)
+#  template: src=indigo-web.service dest=/etc/systemd/system/indigo-web.service
+#  become: yes
+#  become_method: sudo
+
+- name: Create the cassandra database
+  command: "{{ install_dir }}/web/bin/indigo create -c settings"
+
+- name: Collect static
+  command: "{{ install_dir }}/web/bin/python {{ install_dir }}/web/project/manage.py collectstatic --noinput"
+
+- name: Initialise Django database
+  django_manage: command=syncdb app_path="{{ install_dir }}/web/project" virtual_env="{{ install_dir }}/web/"
+
+- name: Set up database
+  command: "{{ install_dir }}/web/bin/python {{ install_dir }}/web/bin/indigo create"
+
+- name: Create default users
+  script: init_user.expect "{{ install_dir }}" "{{ item.user_name }}" "{{ item.password }}" "{{ item.admin }}"
+  ignore_errors: yes
+  with_items:
+    - { user_name: pericles, password: Per1cles, admin: y }
+    - { user_name: pericles1, password: Per1cles, admin: n }
+    - { user_name: pericles2, password: Per1cles, admin: n }
+    - { user_name: guest, password: guest, admin: n }
+
+- name: Create default groups
+  command: "{{ install_dir }}/web/bin/python {{ install_dir }}/web/bin/indigo group-create {{ item.group }}"
+  with_items:
+    - { group: admins }
+    - { group: users }
+    - { group: guest }
+
+- name: Add users to groups
+  command: "{{ install_dir }}/web/bin/python {{ install_dir }}/web/bin/indigo group-add-user {{ item.group }} {{ item.user }}"
+  with_items:
+    - { group: admins, user: pericles }
+    - { group: users, user: pericles }
+    - { group: users, user: pericles1 }
+    - { group: users, user: pericles2 }
+    - { group: guest, user: guest }
+
+- name: Create HTTPS nginx config
+  template: src=indigo-web-ssl.nginx dest=/etc/nginx/sites-available/indigo_https
+  sudo: true
+
+- name: Create SSL directory for nginx
+  file: path=/etc/nginx/ssl state=directory
+  sudo: true
+
+- name: Retrieves facts for SSL certificate
+  stat: path=/etc/nginx/ssl/nginx.crt
+  register: ssl_certificate
+
+- name: Retrieves facts for SSL key
+  stat: path=/etc/nginx/ssl/nginx.key
+  register: ssl_key
+
+- name: Self-sign SSL Certificate when not present
+  expect:
+    command: openssl req -new -x509 -sha256 -newkey rsa:2048 -days 365 -nodes -out nginx.crt -keyout nginx.key
+    chdir: /etc/nginx/ssl
+    responses:
+      Country Name (.*): "UK"
+      State (.*): "Merseyside"
+      Locality (.*): "Liverpool"
+      Organization Name (.*): "Pericles"
+      Organizational Unit Name(.*): ""
+      Common Name (.*): "Pericles"
+      Email (.*): ""
+  when: (ssl_certificate.stat.exists == False) or
+        (ssl_key.stat.exists == False)
+  sudo: true
+
+- name: Delete default nginx config for enabled site
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  sudo: true
+
+- name: Copy nginx config for https mode
+  file: src=/etc/nginx/sites-available/indigo_https dest=/etc/nginx/sites-enabled/indigo_https state=link
+  sudo: true
+
+- name: Start nginx
+  service: name=nginx state=restarted
+  sudo: true
+
+- name: Start the Indigo web service
+  service: name=indigo-web state=started
+  sudo: yes
+  register: indigo-web-installed

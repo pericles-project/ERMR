@@ -1,0 +1,9 @@
+[indigo-databases]
+loc-ermr cassandra_interface=eth1
+
+[indigo-webservers]
+loc-ermr
+
+[indigo:children]
+indigo-databases
+indigo-webservers

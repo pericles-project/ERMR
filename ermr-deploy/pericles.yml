@@ -1,0 +1,7 @@
+---
+- name: Install Pericles specific code
+  remote_user: indigo
+  hosts: indigo-databases
+
+  roles:
+    - pericles

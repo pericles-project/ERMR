@@ -1,0 +1,111 @@
+---
+##############################################################################
+# Java
+# This must be Oracle's Java, and also should use libjna for performance.
+##############################################################################
+
+
+- name: Installation dependencies
+  apt: pkg=python-apt state=installed update_cache=yes force=yes
+  become: yes
+  become_method: sudo
+
+- name: Add PPA for Oracle Java 8
+  apt_repository: repo='ppa:webupd8team/java' state=present
+  become: yes
+  become_method: sudo
+
+- name: Select and agree to licence
+  debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+  become: yes
+  become_method: sudo
+
+- name: System dependencies
+  become: yes
+  become_method: sudo
+  apt: pkg={{ item }} state=installed update_cache=yes force=yes
+  with_items:
+    - python-apt
+    - oracle-java8-installer
+    - libjna-java
+    - python-pip
+    - git
+    - curl
+    # For client machine ...
+    - libev4
+    - libev-dev
+    - build-essential
+    - python-dev
+
+##############################################################################
+# Cassandra
+##############################################################################
+
+- name: Add Cassandra Repo
+  apt_repository: repo="deb http://debian.datastax.com/community stable main" state=present
+  become: yes
+  become_method: sudo
+
+- name: Cassandra repository key
+  shell: curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+  become: yes
+  become_method: sudo
+
+- name: Install cassandra
+  apt: pkg={{ item }} state=installed update_cache=yes force=yes
+  become: yes
+  become_method: sudo
+  with_items:
+    - dsc30
+
+##############################################################################
+# Cassandra Cluster Manager
+# Installs CCM for building a local (single-machine) cluster for development
+# and testing
+##############################################################################
+
+- name: CCM Python Requirements
+  pip: name={{item}}
+  with_items:
+    - PyYAML
+    - cql
+  become: yes
+  become_method: sudo
+  when: production
+
+- name: Download CCM
+  git: repo=https://github.com/pcmanus/ccm.git dest='{{ temp_dir }}/ccm'
+  when: production
+
+- name: Install CCM
+  shell: ./setup.py install
+  become: yes
+  become_method: sudo
+  args:
+    chdir: '{{ temp_dir }}/ccm'
+  when: production
+
+##############################################################################
+# Cassandra Configuration
+# Installs the configuration files for this Cassandra cluster
+##############################################################################
+
+# This will restart Cassandra only if the configuration file has changed. See handlers/main.yaml
+- name: Copy Cassandra configuration file
+  template: src=cassandra.yaml dest=/etc/cassandra/cassandra.yaml
+  notify:
+    - Restart Cassandra
+  become: yes
+  become_method: sudo
+
+- name: Start Cassandra
+  service: name=cassandra state=running
+  become: yes
+  become_method: sudo
+
+- name: Waiting for Cassandra to finish initialization
+  command: /usr/bin/cqlsh "{{ hostvars[inventory_hostname]['ansible_' ~ cassandra_interface]['ipv4']['address'] }}" -e exit
+  register: cqlsh_ready
+  until: cqlsh_ready.rc == 0
+  delay: 10
+  retries: 5

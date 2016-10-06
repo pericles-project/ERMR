@@ -1,0 +1,16 @@
+[Unit]
+Description=Indigo-web job
+
+[Service]
+Environment="CQLENG_ALLOW_SCHEMA_MANAGEMENT=1" "AGENT_CONFIG={{ install_dir }}/agent/project/agent.config"
+
+Restart=on-failure
+
+StandardOutput=tty
+StandardError=tty
+
+User={{ ansible_user_id }}
+Group=nogroup
+
+WorkingDirectory={{ install_dir }}/web/project
+ExecStart={{ install_dir }}/web/bin/gunicorn indigo_ui.wsgi --log-file={{ install_dir }}/log/indigo-web-gunicorn.log --log-level=info --timeout=300

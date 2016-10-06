@@ -1,0 +1,50 @@
+upstream gunicorn {
+    server 127.0.0.1:8000;
+}
+
+server {
+    listen  80;
+    return 301 https://$host$request_uri;
+}
+
+server {
+	# Change to listen 443 ssl;
+    #listen 443 default_server;
+    listen 443 ssl;
+    server_name indigo;
+ 
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /etc/nginx/ssl/nginx.key;
+    ssl_protocols        SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers          HIGH:!aNULL:!MD5;
+
+    client_max_body_size 100m;
+
+    location /static {
+        autoindex on;
+        alias {{ install_dir }}/web/project/static/;
+    }
+
+    location /media {
+        autoindex on;
+        alias {{ install_dir }}/web/project/media/;
+    }
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_pass http://gunicorn;
+        proxy_redirect off;
+        client_max_body_size 10M;
+    }
+
+    location /allegro/ {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://127.0.0.1:10035/;
+    }
+    
+}

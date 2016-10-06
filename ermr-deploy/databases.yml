@@ -1,0 +1,7 @@
+---
+- name: Install a Cassandra database node
+  remote_user: indigo
+  hosts: indigo-databases
+
+  roles:
+    - cassandra

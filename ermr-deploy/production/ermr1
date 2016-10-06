@@ -1,0 +1,11 @@
+# This is the default ansible 'hosts' file.
+
+[indigo-databases]
+pericles cassandra_interface=eth0        # c102-086.cloud.gwdg.de
+
+[indigo-webservers]
+pericles                                 # c102-086.cloud.gwdg.de
+
+[indigo:children]
+indigo-databases
+indigo-webservers 

@@ -1,0 +1,4 @@
+---
+
+cassandra_data_dir: /var/lib/cassandra/data
+cassandra_commit_log_dir: /var/lib/cassandra/commitlog

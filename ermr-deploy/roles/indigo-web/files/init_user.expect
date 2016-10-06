@@ -1,0 +1,22 @@
+#!/usr/bin/expect
+
+# This script is used to create a user with the Indigo command line tools. It's needed so it can respond to tty prompts.
+
+set install_dir [lindex $argv 0]
+set user_name [lindex $argv 1]
+set password [lindex $argv 2]
+
+set env(CQLENG_ALLOW_SCHEMA_MANAGEMENT) 1
+spawn $install_dir/web/bin/python $install_dir/web/bin/indigo user-create $user_name
+
+expect -re ".*administrator.*"
+send "y\r"
+
+expect "Please enter the user's email address: "
+send "admin@example.com\r"
+
+expect "Please enter the user's password: "
+send $password
+send "\r"
+
+expect eof

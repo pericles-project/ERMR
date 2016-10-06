@@ -1,0 +1,7 @@
+---
+- name: Install Allegrograph
+  remote_user: indigo
+  hosts: indigo-databases
+
+  roles:
+    - allegrograph

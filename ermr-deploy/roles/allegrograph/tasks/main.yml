@@ -1,0 +1,42 @@
+---
+##############################################################################
+# Install Allegrograph
+##############################################################################
+
+#- name: Copy Allegro Graph on the server
+#  unarchive: src="agraph-5.1-linuxamd64.64.tar.gz" dest="{{ install_dir }}/src"
+
+
+#- name: Retrieves facts for AllegroGraph install dir
+#  stat: path="{{ install_dir }}/ag5.1"
+#  register: ag_dir
+
+#- name: Install AllegroGraph if it isn't
+#  expect:
+#    command: "{{ install_dir }}/src/agraph-5.1/install-agraph {{ install_dir }}/ag5.1"
+#    responses:
+#      "[/home/indigo/ag5.1/lib/agraph.cfg] (.*)": ""
+#      "[/home/indigo/ag5.1/data] (.*)": ""
+#      "[/home/indigo/ag5.1/log] (.*)": ""
+#      "[/home/indigo/ag5.1/data/agraph.pid] (.*)": ""
+#      "[10035]: (.*)": ""
+#      "[super] (.*)": "pericles"
+#      "SuperUser account password (.*)": "Per1cles"
+#      "SuperUser account password (again) (.*)": "Per1cles"
+#      "[604800] (.*)": ""
+#  when: ag_dir.stat.exists == False
+ 
+#- name: Copy Allegro Graph on the server
+#  unarchive: src="ag5.1.tar.gz" dest="{{ install_dir }}"
+
+- name: Create Allegro start script
+  template: src=start_allegro.sh dest={{ install_dir }}/start_allegro mode=u+rwx
+
+- name: Create Allegro stop script
+  template: src=stop_allegro.sh dest={{ install_dir }}/stop_allegro mode=u+rwx
+
+- name: Create Allegro restart script
+  template: src=restart_allegro.sh dest={{ install_dir }}/restart_allegro mode=u+rwx
+
+
+

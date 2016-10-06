@@ -1,0 +1,11 @@
+---
+- name: Install indigo webserver
+  remote_user: indigo
+  hosts: indigo-webservers
+  vars:
+    https_mode: false
+  
+
+  roles:
+    - indigo-web
+    - indigo-listener

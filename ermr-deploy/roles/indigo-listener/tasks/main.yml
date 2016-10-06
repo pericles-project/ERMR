@@ -1,0 +1,80 @@
+---
+
+- name: Ensure we get the latest Mosquitto MQTT broker
+  apt_repository: repo='ppa:mosquitto-dev/mosquitto-ppa'
+  sudo: yes
+
+- name: Install useful packages
+  apt: pkg={{ item }} state=installed install_recommends=no
+  with_items:
+    - mosquitto
+  sudo: true
+
+- name: Start the MQTT broker
+  service: name=mosquitto state=started
+  sudo: yes
+
+- name: Create script cache directory
+  file: name='{{ install_dir }}/scripts_cache' state=directory
+
+- name: Get the latest Docker
+  command: curl -sSL -o '{{ temp_dir }}/install_docker.sh' https://get.docker.com/
+  sudo: yes
+  register: getdocker
+  args:
+    creates: '{{ temp_dir }}/install_docker.sh'
+
+- name: Futz around with Docker
+  command: chmod +x '{{ temp_dir }}/install_docker.sh'
+  sudo: yes
+  when: getdocker.changed
+
+- name: Install Docker
+  command: '{{ temp_dir }}/install_docker.sh'
+  sudo: yes
+  when: getdocker.changed
+
+- name: Add the user to the docker group
+  user: name={{ ansible_user_id }} groups=docker append=yes
+  sudo: yes
+
+- name: Copy Dockerfile
+  copy: src=Dockerfile dest='{{ install_dir }}/Dockerfile'
+  register: dockerfile
+
+- name: Create Docker image
+  command: /usr/bin/docker build -t alloy_python '{{ install_dir }}'
+  sudo: yes
+  when: dockerfile.changed
+  environment:
+    TMPDIR: '{{ temp_dir }}'
+
+- name: Install requirements
+  pip: name={{ item }} virtualenv="{{ install_dir }}/listener"
+  with_items:
+    - docopt
+    - paho-mqtt
+    - python-magic
+    - gevent
+  environment:
+    TMPDIR: '{{ temp_dir }}'
+
+- name: Install indigo lib
+  shell: "{{ install_dir }}/listener/bin/python setup.py develop"
+  environment:
+    TMPDIR: '{{ temp_dir }}'
+  args:
+    chdir: "{{ install_dir }}/indigo"
+
+- name: Copy listener init script
+  template: src=indigo-listener.conf dest=/etc/init/indigo-listener.conf
+  sudo: yes
+
+- name: Start the listener
+  service: name=indigo-listener state=restarted
+  sudo: yes
+
+- name: Restart the Indigo web service
+  service: name=indigo-web state=restarted
+  sudo: yes
+  when: indigo-web-installed is defined
