@@ -1,0 +1,44 @@
+{% extends "triple_ui/base.html" %}
+
+{% block title %}Triple Store{% endblock title %}
+
+{% block main_content %}
+
+
+<h2>Triple Store</h2>
+
+
+
+<ol class="breadcrumb">
+  <li><a href="{% url 'triple_ui:home' %}">Catalog</a></li>
+</ol>
+<hr/>
+
+{% if is_admin %}
+<div class="row">
+  <div class="pull-right">
+    <a class="btn btn-sm btn-success" href="{% url 'triple_ui:new_repository' %}">Add new repository</a>
+  </div>
+</div>
+<hr/>
+{% endif %}
+
+{% for repository in repositories %}
+  <div class="collection-entry row">
+    <div class="col-md-12">
+        <a href="{% url 'triple_ui:delete_repository' repository=repository %}">
+        <i class="blue-icon glyphicon glyphicon glyphicon-remove-circle"></i>
+        &nbsp;&nbsp;
+        </a>
+      <i class="blue-icon glyphicon glyphicon-folder-open"></i>
+      &nbsp;&nbsp;
+      <a href="{% url 'triple_ui:view' repository=repository %}">
+          {{ repository }}
+      </a>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock main_content %}
+
+

@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: indigo-web
+Version: 1.1
+Summary: Indigo web ui
+Home-page: https://bitbucket.org/archivea/indigo-web
+Author: Archive Analytics
+Author-email: @archiveanalytics.com
+License: Apache License, Version 2.0
+Description: Django web ui for Indigo
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware
+Classifier: Topic :: System :: Archiving

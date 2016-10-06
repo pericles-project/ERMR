@@ -1,0 +1,30 @@
+{% extends "triple_ui/base.html" %}
+
+{% block title %}Delete Repository - {{repository}}{% endblock title %}
+
+{% block main_content %}
+
+    <h2>Delete Repository - {{repository}}</h2>
+
+    <br/><br/>
+    <div style="font-size:1.5em;" class="alert alert-danger">
+        <strong>Deleting this repository will delete this repository 
+    and all statements within it.</strong>
+    </div>
+
+    <div class="row">
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+        <div style='font-size: 1.5em'>
+        Are you sure you wish to continue?
+        </div>
+
+        <form action="{% url 'triple_ui:delete_repository' repository=repository %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-lg btn-danger">Delete this repository</button>
+            <a href="{% url 'triple_ui:home' %}" class="btn btn-lg btn-success">Cancel</a>
+        </form>
+
+    </div>
+{% endblock main_content %}

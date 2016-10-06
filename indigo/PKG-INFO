@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: indigo
+Version: 1.1
+Summary: Indigo core library
+Home-page: https://bitbucket.org/archivea/libindigo
+Author: Archive Analytics
+Author-email: @archiveanalytics.com
+License: Apache License, Version 2.0
+Description: Core library for Indigo development
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware
+Classifier: Topic :: System :: Archiving

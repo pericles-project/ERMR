@@ -1,0 +1,26 @@
+# Eclipse project
+.project
+.pydevproject
+org.eclipse.*
+
+# Python compiled/optimized files
+*.py[co]
+
+# Python packaging/distribution
+*.egg
+*.eggs
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+
+# vim temp files
+*.swp
+.*.swp
+.swp

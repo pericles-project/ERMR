@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Nodes{% endblock title %}
+
+{% block sidebar %}
+    {% include "snippets/sidenav.html" with active="nodes" %}
+{% endblock sidebar %}
+
+
+{% block main_content %}
+
+<h2>{{ node.name }} - Status: {% include "nodes/snippets/status.html" with status=node.status%}
+    <a href="{% url 'nodes:home' %}" class="pull-right btn btn-default">&laquo; Back to Nodes</a>
+</h2>
+<hr/>
+
+
+
+{% endblock main_content %}

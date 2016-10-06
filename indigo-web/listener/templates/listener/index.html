@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Listener{% endblock title %}
+
+{% block sidebar %}
+    {% include "snippets/sidenav.html" with active="listener" %}
+{% endblock sidebar %}
+
+
+{% block main_content %}
+
+<h2>Recent logs from the listener</h2>
+
+<ul>
+{% for script_name, script_info in logs.items %}
+    <li>{{ script_name }}</li>
+  
+    {% for log in script_info %}
+    <ul>
+        <li>{{ log.when }}:</li>
+        stdout: <pre>{{ log.stdout }}</pre>
+        stderr: <pre>{{ log.stderr }}</pre>
+    </ul> 
+    {% endfor %}
+
+{% endfor %}
+</ul>
+
+{% endblock main_content %}

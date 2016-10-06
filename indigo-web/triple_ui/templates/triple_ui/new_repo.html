@@ -1,0 +1,23 @@
+{% extends "triple_ui/base.html" %}
+
+{% block sidebar %}
+    {% include "snippets/sidenav.html" with active="triple" %}
+{% endblock sidebar %}
+
+
+{% block title %}New Repository{% endblock title %}
+
+{% block main_content %}
+
+<h2>New Repository
+    <a class="pull-right btn btn-default" href="{% url 'triple_ui:home' %}">
+    &laquo; Back to Repository list
+    </a>
+    </h2>
+<hr/>
+
+{% include "triple_ui/repository_form.html" with form=form action='new' %}
+
+{% endblock main_content %}
+
+

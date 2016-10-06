@@ -1,0 +1,46 @@
+{% extends "triple_ui/base.html" %}
+
+{% block sidebar %}
+    {% include "snippets/sidenav.html" with active="triple" %}
+{% endblock sidebar %}
+
+
+{% block title %}Add statements to {{repository}}{% endblock title %}
+
+{% block main_content %}
+
+<h2>Add statements to {{repository}}
+    <a class="pull-right btn btn-default" href="{% url 'triple_ui:view' repository=repository %}">
+    &laquo; Back to Repository view
+    </a>
+    </h2>
+<hr/>
+
+
+{% if form.errors %}
+    <div class="alert alert-danger">
+    Please correct the problem in the form below.
+    </div>
+{% endif %}
+
+
+{% url 'triple_ui:add_statements' as post_url %}
+
+<form id="loginForm" method="POST" action="{{post_url}}" novalidate="novalidate" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+<!--     {{ form }} -->
+
+    <div class="well form-group {% if form.errors.file %}has-error{% endif %}">
+        {# We remove the "fakepath" bit because Chrome is odd. See: http://davidwalsh.name/fakepath #}
+        <input type="file" name="file" onchange="$('#name').val(this.value.replace('C:\\fakepath\\', ''))"/>
+    </div>
+    
+
+    <button type="submit" class="btn btn-success btn-block">Add</button>
+</form>
+
+
+{% endblock main_content %}
+
+

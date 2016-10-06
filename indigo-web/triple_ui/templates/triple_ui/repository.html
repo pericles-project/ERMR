@@ -1,0 +1,71 @@
+{% extends "triple_ui/base.html" %}
+
+{% block title %}Triple Store{% endblock title %}
+
+{% block main_content %}
+
+
+<h2>Repository {{ repo }}
+&nbsp;&nbsp;<a class="btn btn-xs btn-danger" href="{% url 'triple_ui:delete_repository' repository=repository %}">Delete</a>
+</h2>
+
+<hr/>
+
+<div >
+    <form  style="margin-left: 4px;margin-right: 4px;" action="{% url 'triple_ui:view' repository=repository %}"
+           method="POST" novalidate="novalidate" enctype="multipart/form-data">
+         {% csrf_token %} 
+        <div class="input-group {% if size == 'full' %}input-group-lg{% endif %}">
+            <input name="query" type="text" placeholder="{query}}" value="{{query}}"
+            class="form-control {% if size == 'full' %}input-lg{% endif %}">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-success">Query</button>
+            </span>
+        </div>
+    </form>
+</div>
+
+
+<hr/>
+
+
+
+<ol class="breadcrumb">
+  <li><a href="{% url 'triple_ui:home' %}">Catalog</a></li>
+  <li><a href="{% url 'triple_ui:view' repository=repository %}">{{ repository }}</a></li>
+</ol>
+<hr/>
+
+{% if is_admin %}
+<div class="row">
+  <div class="pull-right">
+    <a class="btn btn-sm btn-success" href="{% url 'triple_ui:add_statements' repository=repository %}">Add statements</a>
+    <a class="btn btn-sm btn-success" href="{% url 'triple_ui:delete_statements' repository=repository %}">Delete statements</a>
+  </div>
+</div>
+<hr/>
+{% endif %}
+
+<h1>{{results.name}}</h1>
+<table class="table table-hover" summary="Container contents" border="1">
+  <tbody>
+    <tr>
+    {% for coll_name in results.names %}
+      <th>{{coll_name}}</th>
+    {% endfor %}
+    </tr>
+    {% for stat in results.values %}
+      <tr>
+          <td>{{ stat.0 }}</td>
+          <td>{{ stat.1 }}</td>
+          <td>{{ stat.2 }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+{% endblock main_content %}
+
+

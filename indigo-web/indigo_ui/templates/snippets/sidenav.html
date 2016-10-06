@@ -1,0 +1,21 @@
+
+<li {% if active == 'archive' %}class="active"{% endif %}>
+    <a href="{% url 'archive:home' %}">Object Store</a>
+</li>
+<li {% if active == 'triple' %}class="active"{% endif %}>
+    <a href="{% url 'triple_ui:home' %}">Triple Store</a>
+</li>
+<li {% if active == 'users' %}class="active"{% endif %}>
+    <a href="{% url 'users:home' %}">Users</a>
+</li>
+<li {% if active == 'groups' %}class="active"{% endif %}>
+    <a href="{% url 'groups:home' %}">Groups</a>
+</li>
+<li {% if active == 'activity' %}class="active"{% endif %}>
+    <a href="{% url 'activity:home' %}">Activity</a>
+</li>
+{% if user.administrator %}
+<li {% if active == 'listener' %}class="active"{% endif %}>
+    <a href="{% url 'listener:home' %}">Listener</a>
+</li>
+{% endif %}

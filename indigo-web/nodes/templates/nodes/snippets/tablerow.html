@@ -1,0 +1,31 @@
+
+
+
+<tr>
+    <td>
+        {{ node.name }}
+    </td>
+    <td>
+        {{ node.address }}
+    </td>
+    <td>
+       {{ node.last_update|date:"d M H:m" }}
+    </td>
+    <td>
+       {% include "nodes/snippets/status.html" with status=node.status %}
+    </td>
+    <td>
+        &nbsp;&nbsp;
+        <a href="{% url 'nodes:metrics' id=node.id%}"><i class="glyphicon glyphicon-eye-open"></i></a>
+    </td>
+    <td>
+        <span class="pull-right">
+            <a href="{% url 'nodes:logview' id=node.id %}">
+            View log</a>
+            &nbsp;
+            <a href="{% url 'nodes:check' id=node.id %}">Refresh</a>
+            &nbsp;
+            <a href="{% url 'nodes:edit' id=node.id %}">Edit</a>
+        </span>
+    </td>
+</tr>
