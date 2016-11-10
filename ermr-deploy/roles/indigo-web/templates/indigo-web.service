@@ -1,8 +1,10 @@
 [Unit]
 Description=Indigo-web job
+Requires=cassandra.service
+After=cassandra.service
 
 [Service]
-Environment="CQLENG_ALLOW_SCHEMA_MANAGEMENT=1" "AGENT_CONFIG={{ install_dir }}/agent/project/agent.config"
+Environment="CQLENG_ALLOW_SCHEMA_MANAGEMENT=1"
 
 Restart=on-failure
 
@@ -14,3 +16,6 @@ Group=nogroup
 
 WorkingDirectory={{ install_dir }}/web/project
 ExecStart={{ install_dir }}/web/bin/gunicorn indigo_ui.wsgi --log-file={{ install_dir }}/log/indigo-web-gunicorn.log --log-level=info --timeout=300
+
+[Install]
+WantedBy=multi-user.target

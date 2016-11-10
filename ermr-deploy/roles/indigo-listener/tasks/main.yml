@@ -2,41 +2,48 @@
 
 - name: Ensure we get the latest Mosquitto MQTT broker
   apt_repository: repo='ppa:mosquitto-dev/mosquitto-ppa'
-  sudo: yes
+  become: yes
+  become_method: sudo
 
 - name: Install useful packages
   apt: pkg={{ item }} state=installed install_recommends=no
   with_items:
     - mosquitto
-  sudo: true
+  become: yes
+  become_method: sudo
 
 - name: Start the MQTT broker
   service: name=mosquitto state=started
-  sudo: yes
+  become: yes
+  become_method: sudo
 
 - name: Create script cache directory
   file: name='{{ install_dir }}/scripts_cache' state=directory
 
 - name: Get the latest Docker
   command: curl -sSL -o '{{ temp_dir }}/install_docker.sh' https://get.docker.com/
-  sudo: yes
+  become: yes
+  become_method: sudo
   register: getdocker
   args:
     creates: '{{ temp_dir }}/install_docker.sh'
 
 - name: Futz around with Docker
   command: chmod +x '{{ temp_dir }}/install_docker.sh'
-  sudo: yes
+  become: yes
+  become_method: sudo
   when: getdocker.changed
 
 - name: Install Docker
   command: '{{ temp_dir }}/install_docker.sh'
-  sudo: yes
+  become: yes
+  become_method: sudo
   when: getdocker.changed
 
 - name: Add the user to the docker group
   user: name={{ ansible_user_id }} groups=docker append=yes
-  sudo: yes
+  become: yes
+  become_method: sudo
 
 - name: Copy Dockerfile
   copy: src=Dockerfile dest='{{ install_dir }}/Dockerfile'
@@ -44,7 +51,8 @@
 
 - name: Create Docker image
   command: /usr/bin/docker build -t alloy_python '{{ install_dir }}'
-  sudo: yes
+  become: yes
+  become_method: sudo
   when: dockerfile.changed
   environment:
     TMPDIR: '{{ temp_dir }}'
@@ -66,15 +74,23 @@
   args:
     chdir: "{{ install_dir }}/indigo"
 
-- name: Copy listener init script
-  template: src=indigo-listener.conf dest=/etc/init/indigo-listener.conf
-  sudo: yes
+#- name: Copy listener init script (upstart)
+#  template: src=indigo-listener.conf dest=/etc/init/indigo-listener.conf
+#  become: yes
+#  become_method: sudo
+
+- name: Copy listener init script (systemd)
+  template: src=indigo-listener.service dest=/etc/systemd/system/indigo-listener.service
+  become: yes
+  become_method: sudo
 
 - name: Start the listener
   service: name=indigo-listener state=restarted
-  sudo: yes
+  become: yes
+  become_method: sudo
 
 - name: Restart the Indigo web service
   service: name=indigo-web state=restarted
-  sudo: yes
+  become: yes
+  become_method: sudo
   when: indigo-web-installed is defined

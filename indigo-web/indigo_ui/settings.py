@@ -116,7 +116,7 @@ FACT_SERVER = {
 
 ALLEGRO_SERVER = {
     "url": "http://127.0.0.1:10035",
-    "user": 'allegro',
+    "user": 'pericles',
     "pwd": 'Per1cles'
 }
 

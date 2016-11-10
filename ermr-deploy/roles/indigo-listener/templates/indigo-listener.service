@@ -1,0 +1,21 @@
+[Unit]
+Description=Indigo-listener job
+Requires=indigo-web.service
+After=indigo-web.service
+
+[Service]
+Environment="CQLENG_ALLOW_SCHEMA_MANAGEMENT=1" 
+
+Restart=on-failure
+
+StandardOutput=tty
+StandardError=tty
+
+User={{ ansible_user_id }}
+Group=nogroup
+
+WorkingDirectory={{ install_dir }}
+ExecStart={{ install_dir }}/listener/bin/python {{ install_dir }}/indigo/indigo/listener.py scripts_cache /scripts >> {{ install_dir }}/log/indigo-listener.log 2>&1
+
+[Install]
+WantedBy=multi-user.target

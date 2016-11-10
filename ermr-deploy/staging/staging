@@ -1,5 +1,8 @@
 [indigo-databases]
-loc-ermr cassandra_interface=eth1
+#loc-ermr
+#loc-ermr cassandra_interface=enp0s8
+loc-ermr cassandra_interface=enp0s8 cassandra_seed_server=loc-ermr
+
 
 [indigo-webservers]
 loc-ermr

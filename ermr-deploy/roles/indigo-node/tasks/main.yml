@@ -20,6 +20,7 @@
     - iotop
     - vim
     - python-pip
+    - virtualenv
     - python-virtualenv
   become: yes
   become_method: sudo

@@ -1,0 +1,15 @@
+[Unit]
+Description=AlllegroGraph server
+Requires=indigo-web.service
+After=indigo-web.service
+
+[Service]
+Restart=on-failure
+Type=forking
+
+ExecStart={{ install_dir }}/ag5.1/bin/agraph-control  --config {{ install_dir }}/ag5.1/lib/agraph.cfg start
+ExecStop={{ install_dir }}/ag5.1/bin/agraph-control  --config {{ install_dir }}/ag5.1/lib/agraph.cfg stop
+
+
+[Install]
+WantedBy=multi-user.target

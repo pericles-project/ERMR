@@ -42,12 +42,15 @@
 ##############################################################################
 
 - name: Add Cassandra Repo
-  apt_repository: repo="deb http://debian.datastax.com/community stable main" state=present
+#  apt_repository: repo="deb http://debian.datastax.com/community stable main" state=present
+#  apt_repository: repo="deb http://debian.datastax.com/datastax-ddc 3.9 main" state=present
+  apt_repository: repo="deb http://www.apache.org/dist/cassandra/debian 30x main" state=present
   become: yes
   become_method: sudo
 
 - name: Cassandra repository key
-  shell: curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+#  shell: curl -L https://debian.datastax.com/debian/repo_key | sudo apt-key add -
+  shell: curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add - 
   become: yes
   become_method: sudo
 
@@ -56,7 +59,9 @@
   become: yes
   become_method: sudo
   with_items:
-    - dsc30
+#    - dsc30
+#    - datastax-ddc
+    - cassandra
 
 ##############################################################################
 # Cassandra Cluster Manager
@@ -90,6 +95,24 @@
 # Installs the configuration files for this Cassandra cluster
 ##############################################################################
 
+
+# Stop Cassandra before switching to init.d to upstart or systemd
+#- name: Stop Cassandra
+#  service: name=cassandra state=stopped
+#  become: yes
+#  become_method: sudo
+
+#- name: Copy init script (upstart)
+#  template: src=cassandra.conf dest=/etc/init/cassandra.conf
+#  become: yes
+#  become_method: sudo
+
+# Remove the init.d script installed by the debian package
+#- name: Remove init.d script
+#  file: path=/etc/init.d/cassandra state=absent
+#  become: yes
+#  become_method: sudo
+
 # This will restart Cassandra only if the configuration file has changed. See handlers/main.yaml
 - name: Copy Cassandra configuration file
   template: src=cassandra.yaml dest=/etc/cassandra/cassandra.yaml
@@ -103,9 +126,20 @@
   become: yes
   become_method: sudo
 
-- name: Waiting for Cassandra to finish initialization
+- name: Waiting for Cassandra to finish initialization (interface defined)
   command: /usr/bin/cqlsh "{{ hostvars[inventory_hostname]['ansible_' ~ cassandra_interface]['ipv4']['address'] }}" -e exit
   register: cqlsh_ready
   until: cqlsh_ready.rc == 0
   delay: 10
   retries: 5
+  when: cassandra_interface is defined
+
+- name: Waiting for Cassandra to finish initialization (localhost)
+  command: /usr/bin/cqlsh
+  register: cqlsh_ready
+  until: cqlsh_ready.rc == 0
+  delay: 10
+  retries: 5
+  when: cassandra_interface is undefined
+
+

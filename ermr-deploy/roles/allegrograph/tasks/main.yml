@@ -3,31 +3,73 @@
 # Install Allegrograph
 ##############################################################################
 
-#- name: Copy Allegro Graph on the server
-#  unarchive: src="agraph-5.1-linuxamd64.64.tar.gz" dest="{{ install_dir }}/src"
+- name: install needed packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - expect
+    - python-pip
+  become: yes
+  become_method: sudo
 
+- name: Install Global Python modules
+  pip:
+    name=pexpect
+  become: yes
+  become_method: sudo
 
-#- name: Retrieves facts for AllegroGraph install dir
-#  stat: path="{{ install_dir }}/ag5.1"
-#  register: ag_dir
+- name: Create src folder if needed
+  file:
+    path="{{ install_dir }}/src"
+    state=directory
+    mode=0755
 
-#- name: Install AllegroGraph if it isn't
-#  expect:
-#    command: "{{ install_dir }}/src/agraph-5.1/install-agraph {{ install_dir }}/ag5.1"
-#    responses:
-#      "[/home/indigo/ag5.1/lib/agraph.cfg] (.*)": ""
-#      "[/home/indigo/ag5.1/data] (.*)": ""
-#      "[/home/indigo/ag5.1/log] (.*)": ""
-#      "[/home/indigo/ag5.1/data/agraph.pid] (.*)": ""
-#      "[10035]: (.*)": ""
-#      "[super] (.*)": "pericles"
-#      "SuperUser account password (.*)": "Per1cles"
-#      "SuperUser account password (again) (.*)": "Per1cles"
-#      "[604800] (.*)": ""
-#  when: ag_dir.stat.exists == False
- 
-#- name: Copy Allegro Graph on the server
-#  unarchive: src="ag5.1.tar.gz" dest="{{ install_dir }}"
+- name: Retrieves facts for AllegroGraph install package
+  stat:
+    path="{{ install_dir }}/src/agraph-5.1-linuxamd64.64.tar.gz"
+  register: ag_install_tgz
+
+- name: Download AllegroGraph install
+  get_url:
+    url="http://franz.com/ftp/pri/acl/ag/ag5.1/linuxamd64.64/agraph-5.1-linuxamd64.64.tar.gz"
+    dest="{{ install_dir }}/src/agraph-5.1-linuxamd64.64.tar.gz"
+    timeout=100
+  when: ag_install_tgz.stat.exists == False
+
+- name: Retrieves facts for AllegroGraph install src
+  stat:
+    path="{{ install_dir }}/src/agraph-5.1"
+  register: ag_install_src
+
+- name: Extract AllegroGraph
+  command: "tar xzf {{ install_dir }}/src/agraph-5.1-linuxamd64.64.tar.gz"
+  args:
+    chdir: "{{ install_dir }}/src"
+  when: ag_install_src.stat.exists == False
+
+- name: Retrieves facts for AllegroGraph install dir
+  stat: path="{{ install_dir }}/ag5.1"
+  register: ag_dir
+
+- name: Install Allegro
+  shell: "{{ install_dir }}/src/agraph-5.1/install-agraph  /home/indigo/ag5.1 --non-interactive --super-user pericles --super-password Per1cles"
+  when: ag_dir.stat.exists == False
+
+- name: Modify Indigo-web init script (systemd)
+  template: src=allegro.service dest=/etc/systemd/system/allegro.service
+  become: yes
+  become_method: sudo
+  notify:
+    - reload systemctl
+  
+#- name: Modify Indigo-web init script (upstart)
+#  template: src=indigo-web.conf dest=/etc/init/indigo-web.conf
+#  become: yes
+#  become_method: sudo
+
+#- name: Start the AllegroGraph server
+#  service: name=allegro state=started enabled=yes
+#  become: yes
+#  become_method: sudo
 
 - name: Create Allegro start script
   template: src=start_allegro.sh dest={{ install_dir }}/start_allegro mode=u+rwx
