@@ -96,7 +96,7 @@
 ##############################################################################
 
 
-# Stop Cassandra before switching to init.d to upstart or systemd
+# Stop Cassandra before switching from init.d to upstart
 #- name: Stop Cassandra
 #  service: name=cassandra state=stopped
 #  become: yes
@@ -121,11 +121,18 @@
   become: yes
   become_method: sudo
 
+# If Cassandra has to be restarted (configuration file changed) we need to
+# do it before trying to connect. Otherwise it will be restarted at the end
+# of the play
+- meta: flush_handlers
+
+# Start Cassandra if needed
 - name: Start Cassandra
-  service: name=cassandra state=running
+  service: name=cassandra state=started
   become: yes
   become_method: sudo
 
+# Cassandra may be long to start (process started but server not available yet)
 - name: Waiting for Cassandra to finish initialization (interface defined)
   command: /usr/bin/cqlsh "{{ hostvars[inventory_hostname]['ansible_' ~ cassandra_interface]['ipv4']['address'] }}" -e exit
   register: cqlsh_ready
