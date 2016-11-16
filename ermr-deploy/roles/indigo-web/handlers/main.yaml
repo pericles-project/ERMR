@@ -2,3 +2,5 @@
 
 - name: reload systemctl
   command: systemctl daemon-reload
+  become: yes
+  become_method: sudo

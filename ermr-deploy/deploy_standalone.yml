@@ -6,5 +6,5 @@
   hosts: indigo
 
 - include: databases.yml
-#- include: webservers.yml
-#- include: factstore.yml
+- include: webservers.yml
+- include: factstore.yml
