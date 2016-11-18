@@ -66,10 +66,10 @@
 #  become: yes
 #  become_method: sudo
 
-#- name: Start the AllegroGraph server
-#  service: name=allegro state=started enabled=yes
-#  become: yes
-#  become_method: sudo
+- name: Start the AllegroGraph server
+  service: name=allegro state=started enabled=yes
+  become: yes
+  become_method: sudo
 
 - name: Create Allegro start script
   template: src=start_allegro.sh dest={{ install_dir }}/start_allegro mode=u+rwx

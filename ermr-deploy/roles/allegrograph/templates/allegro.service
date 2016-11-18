@@ -7,6 +7,9 @@ After=indigo-web.service
 Restart=on-failure
 Type=forking
 
+User=indigo
+Group=nogroup
+
 ExecStart={{ install_dir }}/ag5.1/bin/agraph-control  --config {{ install_dir }}/ag5.1/lib/agraph.cfg start
 ExecStop={{ install_dir }}/ag5.1/bin/agraph-control  --config {{ install_dir }}/ag5.1/lib/agraph.cfg stop
 
