@@ -28,6 +28,7 @@ urlpatterns = [
    url(r'^$', views.ls_repositories, name="ls_repositories"),
    
    url(r'^(?P<repository>\w+)/dependency$', views.dependency, name="dependency"),
+   url(r'^(?P<repository>\w+)/listPublicImages$', views.ls_public_images, name="ls_public_images"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

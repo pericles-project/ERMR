@@ -25,6 +25,7 @@ from . import views
 
 urlpatterns = [
    url(r'^$', views.home, name='home'),
+   url(r'^view/(?P<repository>.*)/listPublicImages$', views.view_public_images, name='view_public_images'),
    url(r'^view/(?P<repository>.*)$', views.view, name='view'),
    
     url(r'^new/repository$', views.new, name='new_repository'),

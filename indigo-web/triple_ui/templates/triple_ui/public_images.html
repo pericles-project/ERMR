@@ -1,0 +1,26 @@
+{% extends "triple_ui/base.html" %}
+
+{% block title %}Triple Store{% endblock title %}
+
+{% block main_content %}
+
+
+<h2>Repository {{ repository }}</h2>
+
+<hr/>
+
+
+<ol class="breadcrumb">
+  <li><a href="{% url 'triple_ui:home' %}">Catalog</a></li>
+  <li><a href="{% url 'triple_ui:view' repository=repository %}">{{ repository }}</a></li>
+</ol>
+<hr/>
+
+<ul>
+{% for url in results %}
+    <li><img src={{ url }} alt={{ url }} /></li>
+{% endfor %}
+</ul>
+
+
+{% endblock main_content %}

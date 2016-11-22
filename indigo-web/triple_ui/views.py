@@ -41,7 +41,8 @@ from triple_models.allegro_repository import (
     delete_repository,
     delete_repository_statements,
     list_repositories,
-    query_repository
+    query_repository,
+    list_public_images
 )
 
 
@@ -80,6 +81,15 @@ def view(request, repository):
         'query': query
     }
     return render(request, 'triple_ui/repository.html', ctx)
+
+@login_required()
+def view_public_images(request, repository):
+    ok, r, _, msg = list_public_images(repository)
+    ls = [ el[0].replace('"', '') for el in r.json().get('values', []) ]
+    
+    ctx = { 'repository': repository,
+            'results': ls}
+    return render(request, 'triple_ui/public_images.html', ctx)
 
 @login_required()
 def delete_statements(request, repository):

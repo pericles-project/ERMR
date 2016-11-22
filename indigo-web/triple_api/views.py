@@ -264,3 +264,29 @@ def dependency(request, repository):
     tree = Tree(repository, resource_uri, description)
     return JsonResponse(tree.build_json(), safe=False)
 
+
+@api_view(['GET'])
+@authentication_classes([CassandraAuthentication,])
+def ls_public_images(request, repository):
+    """Return a list of the images that have 
+    http://www.pericles-project.eu/ns/DEM-Scenario#releaseState as 
+    public.
+    """
+    query_str ="""SELECT ?url_definition
+WHERE {
+    ?image rdf:type <http://www.pericles-project.eu/ns/DEM-Core#DigitalObject> .
+    ?image <http://www.pericles-project.eu/ns/DEM-Scenario#releaseState> ?release .
+    ?image <http://xrce.xerox.com/LRM#url> ?url_location .
+    ?url_location rdf:type <http://xrce.xerox.com/LRM#Location> .
+    ?url_location <http://xrce.xerox.com/LRM#definition> ?url_definition .
+ FILTER (?release = "public")
+}"""
+    accept = request.accepted_media_type    
+    if not accept in ["application/json",
+                      "application/sparql-results+xml",
+                      "application/sparql-results+json"]:
+        accept = "application/json"
+    return query(repository,
+                 query_str,
+                 accept)
+

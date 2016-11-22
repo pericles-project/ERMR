@@ -222,3 +222,21 @@ def query_repository(name, query, accept="application/json", method="GET"):
     except ConnectionError as e:
         return (False, [], 503, "Triple Store server is down")
 
+
+def list_public_images(name, accept="application/json"):
+    """Return a list of the images that have 
+    http://www.pericles-project.eu/ns/DEM-Scenario#releaseState as 
+    public.
+    """
+    query_str ="""SELECT  DISTINCT ?url_definition
+WHERE {
+    ?image rdf:type <http://www.pericles-project.eu/ns/DEM-Core#DigitalObject> .
+    ?image <http://www.pericles-project.eu/ns/DEM-Scenario#releaseState> ?release .
+    ?image <http://xrce.xerox.com/LRM#url> ?url_location .
+    ?url_location rdf:type <http://xrce.xerox.com/LRM#Location> .
+    ?url_location <http://xrce.xerox.com/LRM#definition> ?url_definition .
+ FILTER (?release = "public")
+}"""
+    return query_repository(name, query_str, accept, "GET")
+
+
