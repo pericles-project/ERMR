@@ -3,3 +3,6 @@
 install_dir: /home/indigo
 temp_dir: /tmp
 production: false
+
+cluster_name: ermr_cluster
+num_tokens: 256

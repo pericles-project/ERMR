@@ -54,22 +54,22 @@
   shell: "{{ install_dir }}/src/agraph-5.1/install-agraph  /home/indigo/ag5.1 --non-interactive --super-user pericles --super-password Per1cles"
   when: ag_dir.stat.exists == False
 
-- name: Modify Indigo-web init script (systemd)
-  template: src=allegro.service dest=/etc/systemd/system/allegro.service
-  become: yes
-  become_method: sudo
-  notify:
-    - reload systemctl
-  
-#- name: Modify Indigo-web init script (upstart)
-#  template: src=indigo-web.conf dest=/etc/init/indigo-web.conf
+#- name: Modify Indigo-web init script (systemd)
+#  template: src=allegro.service dest=/etc/systemd/system/allegro.service
 #  become: yes
 #  become_method: sudo
+#  notify:
+#    - reload systemctl
 
-- name: Start the AllegroGraph server
-  service: name=allegro state=started enabled=yes
+- name: Modify Indigo-web init script (upstart)
+  template: src=indigo-web.conf dest=/etc/init/indigo-web.conf
   become: yes
   become_method: sudo
+
+#- name: Start the AllegroGraph server
+#  service: name=allegro state=started enabled=yes
+#  become: yes
+#  become_method: sudo
 
 - name: Create Allegro start script
   template: src=start_allegro.sh dest={{ install_dir }}/start_allegro mode=u+rwx

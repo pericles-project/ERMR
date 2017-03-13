@@ -74,15 +74,15 @@
   args:
     chdir: "{{ install_dir }}/indigo"
 
-#- name: Copy listener init script (upstart)
-#  template: src=indigo-listener.conf dest=/etc/init/indigo-listener.conf
-#  become: yes
-#  become_method: sudo
-
-- name: Copy listener init script (systemd)
-  template: src=indigo-listener.service dest=/etc/systemd/system/indigo-listener.service
+- name: Copy listener init script (upstart)
+  template: src=indigo-listener.conf dest=/etc/init/indigo-listener.conf
   become: yes
   become_method: sudo
+
+#- name: Copy listener init script (systemd)
+#  template: src=indigo-listener.service dest=/etc/systemd/system/indigo-listener.service
+#  become: yes
+#  become_method: sudo
 
 - name: Start the listener
   service: name=indigo-listener state=restarted

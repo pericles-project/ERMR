@@ -44,17 +44,17 @@
   args:
     chdir: "{{ install_dir }}/indigo"
 
-#- name: Copy init script (upstart)
-#  template: src=indigo-web.conf dest=/etc/init/indigo-web.conf
-#  become: yes
-#  become_method: sudo
-
-- name: Copy Indigo-web init script (systemd)
-  template: src=indigo-web.service dest=/etc/systemd/system/indigo-web.service
+- name: Copy init script (upstart)
+  template: src=indigo-web.conf dest=/etc/init/indigo-web.conf
   become: yes
   become_method: sudo
-  notify:
-    - reload systemctl
+
+#- name: Copy Indigo-web init script (systemd)
+#  template: src=indigo-web.service dest=/etc/systemd/system/indigo-web.service
+#  become: yes
+#  become_method: sudo
+#  notify:
+#    - reload systemctl
 
 - name: Create the cassandra database
   command: "{{ install_dir }}/web/bin/indigo create -c settings"

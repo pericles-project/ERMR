@@ -1,4 +1,0 @@
----
-
-cassandra_interface: eth0
-cassandra_seed_server: ermr

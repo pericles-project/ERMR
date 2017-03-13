@@ -7,7 +7,7 @@
 
 # The name of the cluster. This is mainly used to prevent machines in
 # one logical cluster from joining another.
-cluster_name: 'Test Cluster'
+cluster_name: '{{ cluster_name }}'
 
 # This defines the number of tokens randomly assigned to this node on the ring
 # The more tokens, relative to other nodes, the larger the proportion of data
@@ -22,7 +22,7 @@ cluster_name: 'Test Cluster'
 #
 # If you already have a cluster with 1 token per node, and wish to migrate to 
 # multiple tokens per node, see http://wiki.apache.org/cassandra/Operations
-num_tokens: 256
+num_tokens: '{{ num_tokens }}'
 
 # Triggers automatic allocation of num_tokens tokens for this node. The allocation
 # algorithm attempts to choose tokens in a way that optimizes replicated load over
@@ -331,30 +331,16 @@ commitlog_segment_size_in_mb: 32
 
 ## any class that implements the SeedProvider interface and has a
 ## constructor that takes a Map<String, String> of parameters will do.
-#seed_provider:
-#    # Addresses of hosts that are deemed contact points. 
-#    # Cassandra nodes use this list of hosts to find each other and learn
-#    # the topology of the ring.  You must change this if you are running
-#    # multiple nodes!
-#    - class_name: org.apache.cassandra.locator.SimpleSeedProvider
-#      parameters:
-#          # seeds is actually a comma-delimited list of addresses.
-#          # Ex: "<ip1>,<ip2>,<ip3>"
-#          - seeds: "127.0.0.1"
-
-
 seed_provider:
+    # Addresses of hosts that are deemed contact points. 
+    # Cassandra nodes use this list of hosts to find each other and learn
+    # the topology of the ring.  You must change this if you are running
+    # multiple nodes!
     - class_name: org.apache.cassandra.locator.SimpleSeedProvider
       parameters:
-{% if cassandra_seed_server is defined and cassandra_seed_server in hostvars %}
-           - seeds: "{{ hostvars[cassandra_seed_server]['ansible_' ~ hostvars[cassandra_seed_server]['cassandra_interface']]['ipv4']['address'] }}"
-{% else %}
-    {% if cassandra_interface is defined %}
-           - seeds: "{{ hostvars[inventory_hostname]['ansible_' ~ hostvars[inventory_hostname]['cassandra_interface']]['ipv4']['address'] }}"
-    {% else %}
-           - seeds: "127.0.0.1"
-    {% endif %}
-{% endif %}
+          # seeds is actually a comma-delimited list of addresses.
+          # Ex: "<ip1>,<ip2>,<ip3>"
+          - seeds: "{{ cassandra_seed_server }}"
 
 # For workloads with more data than can fit in memory, Cassandra's
 # bottleneck will be reads that need to fetch data from

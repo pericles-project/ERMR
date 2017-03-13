@@ -24,3 +24,8 @@ develop-eggs
 *.swp
 .*.swp
 .swp
+
+ermr-deploy/deploy_standalone.retry
+
+
+

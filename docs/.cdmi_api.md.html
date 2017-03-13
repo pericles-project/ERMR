@@ -1,0 +1,2155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>/home/jerome/Work/src/ERMR/docs/.cdmi_api.md.html</title>
+
+
+<style type="text/css">
+body {
+	color: #333;
+	font: 13px/1.4 "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	background: transparent;
+	color: #4183c4;
+	text-decoration: none;
+}
+
+a:active,
+a:hover {
+	outline: 0 none;
+	text-decoration: underline;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+dfn {
+	font-style: italic;
+}
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+mark {
+	background: #ff0;
+	color: #000;
+}
+small {
+	font-size: 80%;
+}
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+img {
+	border: 0 none;
+}
+svg:not(:root) {
+	overflow: hidden;
+}
+figure {
+	margin: 1em 40px;
+}
+hr {
+	box-sizing: content-box;
+	height: 0;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace,monospace;
+	font-size: 1em;
+}
+
+pre {
+	overflow: auto;
+	font: 12px Consolas,"Liberation Mono",Menlo,Courier,monospace;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.markdown-body {
+	padding: 30px;
+	font-size: 16px;
+	line-height: 1.6;
+	word-wrap: break-word;
+}
+
+.markdown-body>*:first-child {
+	margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+	margin-bottom: 0 !important;
+}
+
+.markdown-body .absent {
+	color: #c00;
+}
+
+.markdown-body .anchor {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	display: block;
+	padding-right: 6px;
+	padding-left: 30px;
+	margin-left: -30px;
+}
+
+.markdown-body .anchor:focus {
+	outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+	position: relative;
+	margin-top: 1em;
+	margin-bottom: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+	display: none;
+	color: #000;
+	vertical-align: middle;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+	padding-left: 8px;
+	margin-left: -30px;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+	display: inline-block;
+}
+
+.markdown-body h1 tt,
+.markdown-body h1 code,
+.markdown-body h2 tt,
+.markdown-body h2 code,
+.markdown-body h3 tt,
+.markdown-body h3 code,
+.markdown-body h4 tt,
+.markdown-body h4 code,
+.markdown-body h5 tt,
+.markdown-body h5 code,
+.markdown-body h6 tt,
+.markdown-body h6 code {
+	font-size: inherit;
+}
+
+.markdown-body h1 {
+	padding-bottom: 0.3em;
+	font-size: 2.25em;
+	line-height: 1.2;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+	padding-bottom: 0.3em;
+	font-size: 1.75em;
+	line-height: 1.225;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+	font-size: 1.5em;
+	line-height: 1.43;
+}
+
+.markdown-body h4 {
+	font-size: 1.25em;
+}
+
+.markdown-body h5 {
+	font-size: 1em;
+}
+
+.markdown-body h6 {
+	font-size: 1em;
+	color: #777;
+}
+
+.markdown-body p,.markdown-body blockquote,
+.markdown-body ul,.markdown-body ol,
+.markdown-body dl,.markdown-body table,
+.markdown-body pre {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.markdown-body hr {
+	height: 4px;
+	padding: 0;
+	margin: 16px 0;
+	background-color: #e7e7e7;
+	border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+	padding-left: 2em;
+}
+
+.markdown-body ul.no-list,
+.markdown-body ol.no-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.markdown-body li>p {
+	margin-top: 16px;
+}
+
+.markdown-body dl {
+	padding: 0;
+}
+
+.markdown-body dl dt {
+	padding: 0;
+	margin-top: 16px;
+	font-size: 1em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.markdown-body dl dd {
+	padding: 0 16px;
+	margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+	padding: 0 15px;
+	color: #777;
+	border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+	margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+	margin-bottom: 0;
+}
+
+.markdown-body table {
+	display: block;
+	width: 100%;
+	overflow: auto;
+	word-break: normal;
+	word-break: keep-all;
+}
+
+.markdown-body table th {
+	font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+	padding: 6px 13px;
+	border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+	background-color: #fff;
+	border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+	background-color: #f8f8f8;
+}
+
+.markdown-body img {
+	max-width: 100%;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.markdown-body span.frame {
+	display: block;
+	overflow: hidden;
+}
+
+.markdown-body span.frame>span {
+	display: block;
+	float: left;
+	width: auto;
+	padding: 7px;
+	margin: 13px 0 0;
+	overflow: hidden;
+	border: 1px solid #ddd;
+}
+
+.markdown-body span.frame span img {
+	display: block;
+	float: left;
+}
+
+.markdown-body span.frame span span {
+	display: block;
+	padding: 5px 0 0;
+	clear: both;
+	color: #333;
+}
+
+.markdown-body span.align-center {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-center>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: center;
+}
+
+.markdown-body span.align-center span img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.markdown-body span.align-right {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-right>span {
+	display: block;
+	margin: 13px 0 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body span.align-right span img {
+	margin: 0;
+	text-align: right;
+}
+
+.markdown-body span.float-left {
+	display: block;
+	float: left;
+	margin-right: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-left span {
+	margin: 13px 0 0;
+}
+
+.markdown-body span.float-right {
+	display: block;
+	float: right;
+	margin-left: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-right>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body code,.markdown-body tt {
+	padding: 0;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	margin: 0;
+	font-size: 85%;
+	background-color: rgba(0,0,0,0.04);
+	border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after,
+.markdown-body tt:before,
+.markdown-body tt:after {
+	letter-spacing: -0.2em;
+	content: "\00a0";
+}
+
+.markdown-body code br,
+.markdown-body tt br {
+	display: none;
+}
+
+.markdown-body del code {
+	text-decoration: inherit;
+}
+
+.markdown-body pre>code {
+	padding: 0;
+	margin: 0;
+	font-size: 100%;
+	word-break: normal;
+	white-space: pre;
+	background: transparent;
+	border: 0;
+}
+
+.markdown-body .highlight {
+	margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+	padding: 16px;
+	overflow: auto;
+	font-size: 85%;
+	line-height: 1.45;
+	background-color: #f7f7f7;
+	border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+	margin-bottom: 0;
+	word-break: normal;
+}
+
+.markdown-body pre {
+	word-wrap: normal;
+}
+
+.markdown-body pre code,
+.markdown-body pre tt {
+	display: inline;
+	max-width: initial;
+	padding: 0;
+	margin: 0;
+	overflow: initial;
+	line-height: inherit;
+	word-wrap: normal;
+	background-color: transparent;
+	border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after,
+.markdown-body pre tt:before,
+.markdown-body pre tt:after {
+	content: normal;
+}
+
+.highlight .pl-coc,
+.highlight .pl-entl,
+.highlight .pl-entm,
+.highlight .pl-eoa,
+.highlight .pl-mai .pl-sf,
+.highlight .pl-mm,
+.highlight .pl-pdv,
+.highlight .pl-sc,
+.highlight .pl-som,
+.highlight .pl-sr,
+.highlight .pl-v,
+.highlight .pl-vpf {
+	color: #0086b3;
+}
+.highlight .pl-eoac,
+.highlight .pl-mdht,
+.highlight .pl-mi1,
+.highlight .pl-mri,
+.highlight .pl-va,
+.highlight .pl-vpu {
+	color: #008080;
+}
+.highlight .pl-c,
+.highlight .pl-pdc {
+	color: #b4b7b4;
+	font-style: italic;
+}
+.highlight .pl-k,
+.highlight .pl-ko,
+.highlight .pl-kolp,
+.highlight .pl-mc,
+.highlight .pl-mr,
+.highlight .pl-ms,
+.highlight .pl-s,
+.highlight .pl-sok,
+.highlight .pl-st {
+	color: #6e5494;
+}
+.highlight .pl-ef,
+.highlight .pl-enf,
+.highlight .pl-enm,
+.highlight .pl-entc,
+.highlight .pl-eoi,
+.highlight .pl-sf,
+.highlight .pl-smc {
+	color: #d12089;
+}
+.highlight .pl-ens,
+.highlight .pl-eoai,
+.highlight .pl-kos,
+.highlight .pl-mh .pl-pdh,
+.highlight .pl-mp,
+.highlight .pl-pde,
+.highlight .pl-stp {
+	color: #458;
+}
+.highlight .pl-enti {
+	color: #d12089;
+	font-weight: bold;
+}
+.highlight .pl-cce,
+.highlight .pl-enc,
+.highlight .pl-kou,
+.highlight .pl-mq {
+	color: #f93;
+}
+.highlight .pl-mp1 .pl-sf {
+	color: #458;
+	font-weight: bold;
+}
+.highlight .pl-cos,
+.highlight .pl-ent,
+.highlight .pl-md,
+.highlight .pl-mdhf,
+.highlight .pl-ml,
+.highlight .pl-pdc1,
+.highlight .pl-pds,
+.highlight .pl-s1,
+.highlight .pl-scp,
+.highlight .pl-sol {
+	color: #df5000;
+}
+.highlight .pl-c1,
+.highlight .pl-cn,
+.highlight .pl-pse,
+.highlight .pl-pse .pl-s2,
+.highlight .pl-vi {
+	color: #a31515;
+}
+.highlight .pl-mb,
+.highlight .pl-pdb {
+	color: #df5000;
+	font-weight: bold;
+}
+.highlight .pl-mi,
+.highlight .pl-pdi {
+	color: #6e5494;
+	font-style: italic;
+}
+.highlight .pl-ms1 {
+	background-color: #f5f5f5;
+}
+.highlight .pl-mdh,
+.highlight .pl-mdi {
+	font-weight: bold;
+}
+.highlight .pl-mdr {
+	color: #0086b3;
+	font-weight: bold;
+}
+.highlight .pl-s2 {
+	color: #333;
+}
+.highlight .pl-ii {
+	background-color: #df5000;
+	color: #fff;
+}
+.highlight .pl-ib {
+	background-color: #f93;
+}
+.highlight .pl-id {
+	background-color: #a31515;
+	color: #fff;
+}
+.highlight .pl-iu {
+	background-color: #b4b7b4;
+}
+.highlight .pl-mo {
+	color: #969896;
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+function getDocumentScrollTop() 
+{
+   var res = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0;
+   // alert(res);
+   return res;
+}
+
+function setDocumentScrollTop(ypos) 
+{
+	window.scrollTo(0, ypos);
+}
+
+</script>
+
+
+</head>
+<body class="markdown-body">
+<h1> <a id="cloud-data-management-interface-api" class="anchor" href="#cloud-data-management-interface-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cloud Data Management Interface API</h1> 
+<p>The object store can be used to organize collections and digital objects in the store. It implements the Cloud Data Management Interface (CDMI) that defines the functional interface that applications may use to create, retrieve, update and delete data elements from the Object Store. In addition, metadata can be set on collections and their contained data elements through this interface.</p> 
+<p>When you have succesfully deployed ERMR on a host, the CDMI web service is accessible at http://host/api/cdmi.</p> 
+<h2> <a id="collections" class="anchor" href="#collections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Collections</h2> 
+<h3> <a id="create-a-collection-using-http" class="anchor" href="#create-a-collection-using-http" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a collection using HTTP</h3> 
+<h4> <a id="synopsys" class="anchor" href="#synopsys" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>To create a new collection object, the following request shall be performed:</p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;NewCollectionName&gt;/</code></p> 
+<p>where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collection that already exist, with one ‘/’ between each pair of collection names.</li> 
+ <li> <code>&lt;NewCollectionName&gt;</code> is the name for the collection to be created.</li> 
+</ul> 
+<h4> <a id="response-status" class="anchor" href="#response-status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>201 Created</td> 
+   <td>The new collection was created</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>PUT to the collection URI to create a collection:</p> 
+<pre><code>PUT /api/cdmi/MyCollection/ HTTP/1.1
+Host: 192.168.56.100
+
+Response:
+HTTP/1.1 201 Created
+</code></pre> 
+<h3> <a id="create-a-collection-using-cdmi" class="anchor" href="#create-a-collection-using-cdmi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create a collection using CDMI</h3> 
+<h4> <a id="synopsys-1" class="anchor" href="#synopsys-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>To create a new collection object, the following request shall be performed:</p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;NewCollectionName&gt;/</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collection that already exist, with one slash (i.e., &quot;/&quot;) between each pair of collection names.</li> 
+ <li> <code>&lt;NewCollectionName&gt;</code> is the name specified for the collection to be created.</li> 
+</ul> 
+<h4> <a id="request-headers" class="anchor" href="#request-headers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Accept</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-container”</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-container”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="request-body" class="anchor" href="#request-body" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Body</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Field Name</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>metadata</td> 
+   <td>JSON Object</td> 
+   <td>Metadata for the collection object</td> 
+   <td>Optional</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-headers" class="anchor" href="#response-headers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-container”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-message-body" class="anchor" href="#response-message-body" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Message Body</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Field Name</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>objectType</td> 
+   <td>JSON String</td> 
+   <td>“application/cdmi-container”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>objectID</td> 
+   <td>JSON String</td> 
+   <td>ObjectID of the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>objectName</td> 
+   <td>JSON String</td> 
+   <td>Name of the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>parentURI</td> 
+   <td>JSON String</td> 
+   <td>URI for the parent object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>parentID</td> 
+   <td>JSON String</td> 
+   <td>Object ID of the parent object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>metadata</td> 
+   <td>JSON Object</td> 
+   <td>Metadata for the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-status-1" class="anchor" href="#response-status-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>201 Created</td> 
+   <td>The new collection was created</td> 
+  </tr> 
+  <tr> 
+   <td>400 Bad Request</td> 
+   <td>The request contains invalid parameters</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>PUT to the URI the collection object name and metadata:</p> 
+<pre><code>PUT /api/cdmi/MyCollection/ HTTP/1.1
+Host: 192.168.56.100
+Accept: application/cdmi-container
+Content-Type: application/cdmi-container
+X-CDMI-Specification-Version: 1.1
+
+{
+    “metadata”: {}
+}
+
+Response:
+HTTP/1.1 201 Created
+Content-Type: application/cdmi-container
+X-CDMI-Specification-Version: 1.1
+
+{
+    &quot;objectType&quot; : &quot;application/cdmi-container&quot;,
+    &quot;objectID&quot; : &quot;00007ED900104E1D14771DC67C27BF8B&quot;,
+    &quot;objectName&quot; : &quot;MyCollection/&quot;,
+    &quot;parentURI&quot; : &quot;/&quot;,
+    &quot;parentID&quot; : &quot;00007E7F0010128E42D87EE34F5A6560&quot;,
+    &quot;metadata&quot; : {
+                  ...
+                 },
+}
+</code></pre> 
+<h3> <a id="delete-a-collection-using-http" class="anchor" href="#delete-a-collection-using-http" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delete a collection using HTTP</h3> 
+<h4> <a id="synopsys-2" class="anchor" href="#synopsys-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>To delete an existing container object, including all contained children, the following request shall be performed:</p> 
+<p><code>DELETE &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;TheCollectionName&gt;/</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collection objects.</li> 
+ <li> <code>&lt;TheCollectionName&gt;</code> is the name of the collection object to be deleted.</li> 
+</ul> 
+<h4> <a id="response-status-2" class="anchor" href="#response-status-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>204 No Content</td> 
+   <td>The collection was deleted</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>DELETE to the collection URI:</p> 
+<pre><code>DELETE /api/cdmi/MyCollection/ HTTP/1.1
+Host: 192.168.56.100
+
+Response:
+HTTP/1.1 204 No Content
+</code></pre> 
+<h3> <a id="delete-a-collection-using-cdmi" class="anchor" href="#delete-a-collection-using-cdmi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delete a collection using CDMI</h3> 
+<h4> <a id="synopsys-3" class="anchor" href="#synopsys-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>To delete an existing container object, including all contained children, the following request shall be performed:</p> 
+<p><code>DELETE &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;TheCollectionName&gt;/</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collection names.</li> 
+ <li> <code>&lt;TheCollectionName&gt;</code> is the name of the collection to be deleted.</li> 
+</ul> 
+<h4> <a id="request-headers-1" class="anchor" href="#request-headers-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-status-3" class="anchor" href="#response-status-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>204 No Content</td> 
+   <td>The collection was deleted</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-3" class="anchor" href="#example-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>DELETE the collection at URI:</p> 
+<pre><code>DELETE /api/cdmi/MyCollection/ HTTP/1.1
+Host: 192.168.56.100
+
+Response:
+HTTP/1.1 204 No Content
+</code></pre> 
+<h3> <a id="read-a-collection-using-cdmi" class="anchor" href="#read-a-collection-using-cdmi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Read a collection using CDMI</h3> 
+<h4> <a id="synopsys-4" class="anchor" href="#synopsys-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>To read all fields from an existing collection object, the following request shall be performed:</p> 
+<p><code>GET &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;TheCollectionName&gt;/</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collection objects.</li> 
+ <li> <code>&lt;TheCollectionName&gt;</code> is the name specified for the collection object to be read from.</li> 
+</ul> 
+<h4> <a id="request-headers-2" class="anchor" href="#request-headers-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Accept</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-container”</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-headers-1" class="anchor" href="#response-headers-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-container”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-message-body-1" class="anchor" href="#response-message-body-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Message Body</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Field Name</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>objectType</td> 
+   <td>JSON String</td> 
+   <td>“application/cdmi-container”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>objectID</td> 
+   <td>JSON String</td> 
+   <td>ObjectID of the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>objectName</td> 
+   <td>JSON String</td> 
+   <td>Name of the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>parentURI</td> 
+   <td>JSON String</td> 
+   <td>URI for the parent object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>parentID</td> 
+   <td>JSON String</td> 
+   <td>Object ID of the parent object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>metadata</td> 
+   <td>JSON Object</td> 
+   <td>Metadata for the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>children</td> 
+   <td>JSON Array of JSON Strings</td> 
+   <td>Name of the children objects in the collection object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-status-4" class="anchor" href="#response-status-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>200 OK</td> 
+   <td>The metadata for the collection is provided in the message body</td> 
+  </tr> 
+  <tr> 
+   <td>400 Bad Request</td> 
+   <td>The request contains invalid parameters or field names</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-4" class="anchor" href="#example-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>GET to the collection object URI to read all the fields of the collection object:</p> 
+<pre><code>GET /api/cdmi/MyCollection/ HTTP/1.1
+Host: 192.168.56.100
+Accept: application/cdmi-container
+X-CDMI-Specification-Version: 1.1
+
+Response:
+HTTP/1.1 200 OK
+Content-Type: application/cdmi-container
+X-CDMI-Specification-Version: 1.1
+
+{
+    &quot;objectType&quot; : &quot;application/cdmi-container&quot;,
+    &quot;objectID&quot; : &quot;00007ED900104E1D14771DC67C27BF8B&quot;,
+    &quot;objectName&quot; : &quot;MyCollection/&quot;,
+    &quot;parentURI&quot; : &quot;/&quot;,
+    &quot;parentID&quot; : &quot;00007E7F0010128E42D87EE34F5A6560&quot;,
+    &quot;metadata&quot; : {
+                    ...
+                 },
+    &quot;children&quot; : [
+                   &quot;child1&quot;,
+                   “child2”,
+                   …
+                 ]
+}
+</code></pre> 
+<h3> <a id="update-a-collection-using-cdmi" class="anchor" href="#update-a-collection-using-cdmi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update a collection using CDMI</h3> 
+<h4> <a id="synopsys-5" class="anchor" href="#synopsys-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>To update some or all fields in an existing collection object, the following request shall be performed:</p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;TheCollectionName&gt;/</code></p> 
+<p>To add, update, and remove specific metadata items of an existing collection object, the following request shall be performed:</p> 
+<p><code>PUT &lt;root URI&gt; /api/cdmi/ &lt;CollectionName&gt; / &lt;TheCollectionName&gt; / ?metadata:&lt;metadataname&gt;</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collection objects.</li> 
+ <li> <code>&lt;TheCollectionName&gt;</code> is the name of the collection object to be updated.</li> 
+</ul> 
+<h4> <a id="request-headers-3" class="anchor" href="#request-headers-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Accept</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-container”</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="request-body-1" class="anchor" href="#request-body-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Body</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Field Name</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>metadata</td> 
+   <td>JSON Object</td> 
+   <td>Metadata for the collection object</td> 
+   <td>Optional</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-status-5" class="anchor" href="#response-status-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>204 No Content</td> 
+   <td>The collection content was updated</td> 
+  </tr> 
+  <tr> 
+   <td>400 Bad Request</td> 
+   <td>The request contains invalid parameters</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-5" class="anchor" href="#example-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>PUT to the collection object URI to set new metadata :</p> 
+<pre><code>PUT /api/cdmi/MyCollection/ HTTP/1.1
+Host: 192.168.56.100
+Content-Type: application/cdmi-container
+X-CDMI-Specification-Version: 1.1
+
+{
+&quot;metadata&quot; : { ...
+             }
+}
+
+Response:
+HTTP/1.1 204 No Content
+</code></pre> 
+<h2> <a id="data-objects" class="anchor" href="#data-objects" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data Objects</h2> 
+<h3> <a id="create-an-object-using-http" class="anchor" href="#create-an-object-using-http" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create an object using HTTP</h3> 
+<h4> <a id="synopsys-6" class="anchor" href="#synopsys-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>The following HTTP PUT creates a new data object at the specified URI:</p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt;</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the CDMI cloud.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collections that already exist, with one slash (i.e., &quot;/&quot;) between each pair of collection names.</li> 
+ <li> <code>&lt;DataObjectName&gt;</code> is the name specified for the data object to be created</li> 
+</ul> 
+<h4> <a id="request-headers-4" class="anchor" href="#request-headers-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>The content type of the data to be stored as a data object</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>Content-Range</td> 
+   <td>Header String</td> 
+   <td>A valid range-specifier</td> 
+   <td>Optional</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="request-body-2" class="anchor" href="#request-body-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Body</h4> 
+<p>The request message body contains the data to be stored.</p> 
+<h4> <a id="response-status-6" class="anchor" href="#response-status-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>201 Created</td> 
+   <td>The new data object was created</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-6" class="anchor" href="#example-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>PUT to the collection URI the data object name and contents:</p> 
+<pre><code>PUT /api/cdmi/MyCollection/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+Content-Type: text/plain;charset=utf-8
+Content-Length: 37
+
+This is the Value of this Data Object
+
+Response:
+HTTP/1.1 201 Created
+</code></pre> 
+<h3> <a id="create-an-object-using-cdmi" class="anchor" href="#create-an-object-using-cdmi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create an object using CDMI</h3> 
+<h4> <a id="synopsys-7" class="anchor" href="#synopsys-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>To create a new data object, the following request shall be performed:</p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt;</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collections that already exist, with one slash (i.e., &quot;/&quot;) between each pair of collection names.</li> 
+ <li> <code>&lt;DataObjectName&gt;</code> is the name specified for the data object to be created.</li> 
+</ul> 
+<h4> <a id="request-headers-5" class="anchor" href="#request-headers-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Accept</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-object”</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-object”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="request-message-body" class="anchor" href="#request-message-body" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Message Body</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Field Name</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>mimetype</td> 
+   <td>JSON String</td> 
+   <td>Mime type of the data contained within the value field</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>metadata</td> 
+   <td>JSON Object</td> 
+   <td>Metadata for the data object</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>value</td> 
+   <td>JSON String</td> 
+   <td>The data object value</td> 
+   <td>Optional</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-headers-2" class="anchor" href="#response-headers-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-object”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-message-body-2" class="anchor" href="#response-message-body-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Message Body</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Field Name</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>objectType</td> 
+   <td>JSON String</td> 
+   <td>“application/cdmi-object”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>objectID</td> 
+   <td>JSON String</td> 
+   <td>ObjectID of the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>objectName</td> 
+   <td>JSON String</td> 
+   <td>Name of the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>parentURI</td> 
+   <td>JSON String</td> 
+   <td>URI for the parent object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>parentID</td> 
+   <td>JSON String</td> 
+   <td>Object ID of the parent object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>mimetype</td> 
+   <td>JSON String</td> 
+   <td>MIME type of the value of the data object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>metadata</td> 
+   <td>JSON Object</td> 
+   <td>Metadata for the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-status-7" class="anchor" href="#response-status-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>201 Created</td> 
+   <td>The new data object was created</td> 
+  </tr> 
+  <tr> 
+   <td>400 Bad Request</td> 
+   <td>The request contains invalid parameters</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-7" class="anchor" href="#example-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>PUT to the collection URI the data object name and contents:</p> 
+<pre><code>PUT /api/cdmi/MyCollection/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+Accept: application/cdmi-object
+Content-Type: application/cdmi-object
+X-CDMI-Specification-Version: 1.1
+
+{
+    &quot;mimetype&quot; : &quot;text/plain&quot;,
+    &quot;metadata&quot; : { ...
+    },
+    &quot;value&quot; : &quot;This is the Value of this Data Object&quot;
+}
+
+Response:
+HTTP/1.1 201 Created
+Content-Type: application/cdmi-object
+X-CDMI-Specification-Version: 1.1
+{
+    &quot;objectType&quot; : &quot;application/cdmi-object&quot;,
+    &quot;objectID&quot; : &quot;00007ED90010D891022876A8DE0BC0FD&quot;,
+    &quot;objectName&quot; : &quot;MyDataObject.txt&quot;,
+    &quot;parentURI&quot; : &quot;/MyContainer/&quot;,
+    &quot;parentID&quot; : &quot;00007E7F00102E230ED82694DAA975D2&quot;,
+    &quot;mimetype&quot; : &quot;text/plain&quot;,
+    &quot;metadata&quot; : {
+        &quot;cdmi_size&quot; : &quot;37&quot;
+    }
+}
+</code></pre> 
+<h3> <a id="delete-an-object-using-http" class="anchor" href="#delete-an-object-using-http" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delete an object using HTTP</h3> 
+<h4> <a id="synopsys-8" class="anchor" href="#synopsys-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>The following HTTP DELETE deletes an existing data object at the specified URI:</p> 
+<p><code>DELETE &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt;</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the CDMI cloud.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collections.</li> 
+ <li> <code>&lt;DataObjectName&gt;</code> is the name of the data object to be deleted.</li> 
+</ul> 
+<h4> <a id="response-status-8" class="anchor" href="#response-status-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>204 No Content</td> 
+   <td>The data object was deleted</td> 
+  </tr> 
+  <tr> 
+   <td>400 Bad Request</td> 
+   <td>The request contains invalid parameters</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-8" class="anchor" href="#example-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>DELETE to the data object URI:</p> 
+<pre><code>DELETE /api/cdmi/MyCollection/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+
+Response:
+HTTP/1.1 204 No Content
+</code></pre> 
+<h3> <a id="delete-an-object-using-cdmi" class="anchor" href="#delete-an-object-using-cdmi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delete an object using CDMI</h3> 
+<h4> <a id="synopsys-9" class="anchor" href="#synopsys-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>The following HTTP DELETE deletes an existing data object at the specified URI:</p> 
+<p><code>DELETE &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt;</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the CDMI cloud.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collections.</li> 
+ <li> <code>&lt;DataObjectName&gt;</code> is the name of the data object to be deleted.</li> 
+</ul> 
+<h4> <a id="request-headers-6" class="anchor" href="#request-headers-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-status-9" class="anchor" href="#response-status-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>204 No Content</td> 
+   <td>The data object was deleted</td> 
+  </tr> 
+  <tr> 
+   <td>400 Bad Request</td> 
+   <td>The request contains invalid parameters</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-9" class="anchor" href="#example-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>DELETE the data object URI:</p> 
+<pre><code>DELETE /api/cdmi/MyCollection/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+X-CDMI-Specification-Version: 1.1
+
+Response:
+HTTP/1.1 204 No Content
+</code></pre> 
+<h3> <a id="read-an-object-using-http" class="anchor" href="#read-an-object-using-http" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Read an object using HTTP</h3> 
+<h4> <a id="synopsys-10" class="anchor" href="#synopsys-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>The following HTTP GET reads from an existing data object at the specified URI:</p> 
+<p><code>GET &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt;</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collections.</li> 
+ <li> <code>&lt;DataObjectName&gt;</code> is the name of the data object to be read from</li> 
+</ul> 
+<h4> <a id="request-headers-7" class="anchor" href="#request-headers-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Range</td> 
+   <td>Header String</td> 
+   <td>A valid range specifier</td> 
+   <td>Optional</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-headers-3" class="anchor" href="#response-headers-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>The mimetype of the data object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-message-body-3" class="anchor" href="#response-message-body-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Message Body</h4> 
+<p>The response message body is the content of the data object.</p> 
+<h4> <a id="response-status-10" class="anchor" href="#response-status-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>20O OK</td> 
+   <td>The data object content was returned in the response</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example 1</h4> 
+<p>GET to the data object URI to read the value of the data object:</p> 
+<pre><code>GET /api/cdmi/MyCollection/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+
+Response:
+HTTP/1.1 200 OK
+Content-Type: text/plain
+Content-Length: 37
+
+This is the Value of this Data Object
+</code></pre> 
+<h4> <a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example 2</h4> 
+<p>GET to the data object URI to read the first 11 bytes of the value of the data object:</p> 
+<pre><code>GET /api/cdmi/MyContainer/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+Range: bytes=0-10
+
+Response:
+HTTP/1.1 206 Partial Content
+Content-Type: text/plain
+Content-Range: bytes 0-10/37
+Content-Length: 11
+
+This is the
+</code></pre> 
+<h3> <a id="read-an-object-using-cdmi" class="anchor" href="#read-an-object-using-cdmi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Read an object using CDMI</h3> 
+<h4> <a id="synopsys-11" class="anchor" href="#synopsys-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>The following HTTP GET reads from an existing data object at the specified URI:</p> 
+<p><code>GET &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt;</code></p> 
+<p><code>GET &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt; ?value:&lt;range&gt;;...</code></p> 
+<p><code>GET &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt; ?metadata:&lt;prefix&gt;;...</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the CDMI cloud.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collections.</li> 
+ <li> <code>&lt;DataObjectName&gt;</code> is the name of the data object to be read from.</li> 
+ <li> <code>&lt;range&gt;</code> is a byte range of the data object value to be returned in the value field.</li> 
+ <li> <code>&lt;prefix&gt;</code> is a matching prefix that returns all metadata items that start with the prefix value.</li> 
+</ul> 
+<h4> <a id="request-headers-8" class="anchor" href="#request-headers-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Accept</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-object”</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-headers-4" class="anchor" href="#response-headers-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-object”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-message-body-4" class="anchor" href="#response-message-body-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Message Body</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Field Name</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>objectType</td> 
+   <td>JSON String</td> 
+   <td>“application/cdmi-object”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>objectID</td> 
+   <td>JSON String</td> 
+   <td>ObjectID of the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>objectName</td> 
+   <td>JSON String</td> 
+   <td>Name of the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>parentURI</td> 
+   <td>JSON String</td> 
+   <td>URI for the parent object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>parentID</td> 
+   <td>JSON String</td> 
+   <td>Object ID of the parent object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>mimetype</td> 
+   <td>JSON String</td> 
+   <td>MIME type of the value of the data object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>metadata</td> 
+   <td>JSON Object</td> 
+   <td>Metadata for the object</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>value</td> 
+   <td>JSON String</td> 
+   <td>data object value</td> 
+   <td>Conditional</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-status-11" class="anchor" href="#response-status-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>20O OK</td> 
+   <td>The data object content was returned in the response</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-10" class="anchor" href="#example-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>GET to the data object URI to read all fields of the data object:</p> 
+<pre><code>GET /api/cdmi/MyCollection/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+Accept: application/cdmi-object
+X-CDMI-Specification-Version: 1.1
+
+Response:
+HTTP/1.1 200 OK
+X-CDMI-Specification-Version: 1.1
+Content-Type: application/cdmi-object
+
+{
+    &quot;objectType&quot; : &quot;application/cdmi-object&quot;,
+    &quot;objectID&quot; : &quot;00007ED90010D891022876A8DE0BC0FD&quot;,
+    &quot;objectName&quot; : &quot;MyDataObject.txt&quot;,
+    &quot;parentURI&quot; : &quot;/MyCollection/&quot;,
+    &quot;parentID&quot; : &quot;00007E7F00102E230ED82694DAA975D2&quot;,
+    &quot;mimetype&quot; : &quot;text/plain&quot;,
+    &quot;metadata&quot; : {
+        &quot;cdmi_size&quot; : &quot;37&quot;
+    },
+    &quot;valuerange&quot; : &quot;0-36&quot;,
+    &quot;value&quot; : &quot;This is the Value of this Data Object&quot;
+}
+</code></pre> 
+<h3> <a id="update-an-object-using-http" class="anchor" href="#update-an-object-using-http" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update an object using HTTP</h3> 
+<h4> <a id="synopsys-12" class="anchor" href="#synopsys-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>The following HTTP PUT updates an existing data object at the specified URI:</p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt;</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the CDMI cloud.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collections.</li> 
+ <li> <code>&lt;DataObjectName&gt;</code> is the name of the data object to be updated.</li> 
+</ul> 
+<h4> <a id="request-headers-9" class="anchor" href="#request-headers-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>The mime type of the data to be stored as a data object</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>Content-Range</td> 
+   <td>Header String</td> 
+   <td>A valid range-specifier</td> 
+   <td>Optional</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="request-body-3" class="anchor" href="#request-body-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Body</h4> 
+<p>The request message body contains the data to be stored.</p> 
+<h4> <a id="response-status-12" class="anchor" href="#response-status-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>204 No Content</td> 
+   <td>The data object content was updated</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-11" class="anchor" href="#example-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>PUT to the data object URI to update the value of the data object:</p> 
+<pre><code>PUT /api/cdmi/MyCollection/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+Content-Type: text/plain
+Content-Length: 37
+
+This is the value of this data object
+
+Response:
+HTTP/1.1 204 No Content
+</code></pre> 
+<h3> <a id="update-an-object-using-cdmi" class="anchor" href="#update-an-object-using-cdmi" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update an object using CDMI</h3> 
+<h4> <a id="synopsys-13" class="anchor" href="#synopsys-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsys</h4> 
+<p>The following HTTP PUT updates an existing data object at the specified URI:</p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt;</code></p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt; ?value:&lt;range&gt;</code></p> 
+<p><code>PUT &lt;root URI&gt;/api/cdmi/&lt;CollectionName&gt;/&lt;DataObjectName&gt; ?metadata:&lt;metadataname&gt;</code></p> 
+<p>Where:</p> 
+<ul> 
+ <li> <code>&lt;root URI&gt;</code> is the path to the registry.</li> 
+ <li> <code>&lt;CollectionName&gt;</code> is zero or more intermediate collections that already exist, with one slash (i.e., &quot;/&quot;) between each pair of collection names.</li> 
+ <li> <code>&lt;DataObjectName&gt;</code> is the name specified for the data object to be created.</li> 
+ <li> <code>&lt;range&gt;</code> is a byte range for the data object value to be updated.</li> 
+</ul> 
+<h4> <a id="request-headers-10" class="anchor" href="#request-headers-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Headers</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Header</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Content-Type</td> 
+   <td>Header String</td> 
+   <td>“application/cdmi-object”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+  <tr> 
+   <td>X-CDMI-Specification-Version</td> 
+   <td>Header String</td> 
+   <td>“1.1”</td> 
+   <td>Mandatory</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="request-message-body-1" class="anchor" href="#request-message-body-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request Message Body</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Field Name</th> 
+   <th>Type</th> 
+   <th>Description</th> 
+   <th>Requirement</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>mimetype</td> 
+   <td>JSON String</td> 
+   <td>Mime type of the data contained within the value field</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>metadata</td> 
+   <td>JSON Object</td> 
+   <td>Metadata for the data object</td> 
+   <td>Optional</td> 
+  </tr> 
+  <tr> 
+   <td>value</td> 
+   <td>JSON String</td> 
+   <td>The data object value</td> 
+   <td>Optional</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="response-status-13" class="anchor" href="#response-status-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response Status</h4> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>HTTP Status</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>204 No Content</td> 
+   <td>The data object was updated</td> 
+  </tr> 
+  <tr> 
+   <td>400 Bad Request</td> 
+   <td>The request contains invalid parameters</td> 
+  </tr> 
+  <tr> 
+   <td>401 Unauthorized</td> 
+   <td>The authentication credentials are missing or invalid</td> 
+  </tr> 
+  <tr> 
+   <td>403 Forbidden</td> 
+   <td>The client lacks the proper authorization</td> 
+  </tr> 
+  <tr> 
+   <td>404 Not Found</td> 
+   <td>The resource was not found at the specified URI</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="example-12" class="anchor" href="#example-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h4> 
+<p>PUT to the data object URI to set new field values:</p> 
+<pre><code>PUT /api/cdmi/MyCollection/MyDataObject.txt HTTP/1.1
+Host: 192.168.56.100
+Accept: application/cdmi-object
+Content-Type: application/cdmi-object
+X-CDMI-Specification-Version: 1.1
+{
+    &quot;mimetype&quot; : &quot;text/plain&quot;,
+    &quot;metadata&quot; : {
+       &quot;colour&quot;: &quot;red&quot;,
+    },
+    &quot;value&quot; : &quot;This is the Value of this Data Object&quot;
+}
+
+
+Response:
+HTTP/1.1 204 No Content
+</code></pre>
+</body>
+</html>
